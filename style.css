@@ -1,0 +1,266 @@
+:root {
+  --primary: #4f46e5;
+  --primary-light: #a5b4fc;
+  --bg-body: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --radius-xl: 30px;
+  --radius-lg: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cabin', system-ui, sans-serif;
+}
+body {
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  padding: 40px 20px;
+  line-height: 1.6;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Generic Box Section */
+.box-section {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Style untuk header section */
+.section-header-signature,
+.section-header-verified {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 auto 30px auto;
+  display: block;
+  width: fit-content;
+  background: rgba(79, 70, 229, 0.08);
+  padding: 12px 35px;
+  border-radius: 50px;
+  color: var(--primary);
+  backdrop-filter: blur(5px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* 1. PROFILE HEADER */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  text-align: left;
+}
+.profile-content {
+  flex: 1;
+}
+
+.profile-img-wrapper {
+  width: 170px;
+  height: 170px;
+  flex-shrink: 0;
+  padding: 4px;
+  background: linear-gradient(45deg, #475569, #1e293b);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit; /* Mengikuti bentuk bubble wrapper */
+  object-fit: cover;
+  border: 4px solid white;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.name {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 5px;
+}
+.tagline {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+.bio {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.social-links {
+  display: flex;
+  gap: 20px;
+}
+.social-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.social-link:hover {
+  color: var(--primary);
+}
+
+/* 2. SIGNATURE SLIDER (FOCUS PERSPECTIVE) */
+.slider-viewport {
+  position: relative;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+.slider-viewport:active {
+  cursor: grabbing;
+}
+
+.slide-item {
+  position: absolute;
+  width: 360px;
+  height: 220px;
+  border-radius: var(--radius-lg);
+  background-size: cover;
+  background-position: center;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px;
+  color: white;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  opacity: 0;
+}
+.slide-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+  z-index: 1;
+}
+.slide-content {
+  position: relative;
+  z-index: 2;
+}
+
+.slide-item.active {
+  transform: translateX(0) scale(1.05);
+  z-index: 10;
+  opacity: 1;
+  filter: blur(0);
+  pointer-events: auto;
+}
+.slide-item.prev,
+.slide-item.next {
+  z-index: 5;
+  opacity: 0.7;
+  filter: blur(2px);
+}
+.slide-item.prev {
+  transform: translateX(-200px) scale(0.8);
+}
+.slide-item.next {
+  transform: translateX(200px) scale(0.8);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+.dot.active {
+  background: var(--primary);
+  width: 28px;
+  border-radius: 10px;
+}
+
+/* 4. PROFESSIONAL CREDENTIALS (LIST) */
+.cred-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f8fafc;
+}
+.cred-row:last-child {
+  border-bottom: none;
+}
+.cred-info h5 {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+.cred-info small {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+}
+.btn-verify {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--primary);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  .social-links {
+    justify-content: center;
+  }
+  .slide-item {
+    width: 280px;
+    height: 180px;
+  }
+  .slide-item.prev {
+    transform: translateX(-120px) scale(0.75);
+  }
+  .slide-item.next {
+    transform: translateX(120px) scale(0.75);
+  }
+  .box-section {
+    padding: 30px 20px;
+  }
+}
